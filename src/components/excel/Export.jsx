@@ -6,7 +6,7 @@ const Export = ({data, dataFiltrada, nombre}) =>{
     useEffect(() => {
         let customHeadings = []
 
-        if (nombre ==='recibo') {
+        if (nombre ==='recibos') {
           if (dataFiltrada.length >0) {
             customHeadings = dataFiltrada.map(item=>({
               "Nro Recibo": 'Nro. '+item.id,
