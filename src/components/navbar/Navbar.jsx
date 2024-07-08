@@ -82,7 +82,7 @@ const NavBar = () =>{
                                 <span className="icon is-small is-right mr-2">
                                     <i className="fa-solid fa-person-circle-plus"></i>
                                 </span>
-                                Registrar Propietarios
+                                Registrar Usuario
                             </span>
                         </Link>
 
