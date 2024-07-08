@@ -1326,6 +1326,8 @@ a.box:active {
   background-color: #fff;
   color: hsl(0, 0%, 21%);
 }
+
+
 .button.is-dark.is-inverted.is-outlined.is-loading:hover::after, .button.is-dark.is-inverted.is-outlined.is-loading.is-hovered::after, .button.is-dark.is-inverted.is-outlined.is-loading:focus::after, .button.is-dark.is-inverted.is-outlined.is-loading.is-focused::after {
   border-color: transparent transparent hsl(0, 0%, 21%) hsl(0, 0%, 21%) !important;
 }
@@ -32164,4 +32166,8 @@ a.has-text-orange:hover, a.has-text-orange:focus {
 
 .has-background-success-market{
   background: hsl(135.69deg 100% 36%) !important;
+}
+
+.has-background-body{
+  background-color:#f2f2f2;
 }
