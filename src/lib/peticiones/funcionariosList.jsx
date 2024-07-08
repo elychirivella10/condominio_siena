@@ -19,3 +19,11 @@ export async function propietarios() {
     const respuesta = await axios.get(`${rutaAxios}usuarios`)
     return respuesta.data.body
 }
+export async function propietariosEliminar(id, usuario) {
+    axios.put(`${rutaAxios}unidades`,{id:id}).then(res=>{
+        axios.put(`${rutaAxios}usuarios`,{id:usuario}).then(ress=>{
+            return ress.data.body
+        })
+    })
+    //return respuesta.data.body
+}

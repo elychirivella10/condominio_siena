@@ -32,10 +32,17 @@ const Form =()=> {
     rol: "",
     activo:1
   })
+  const [unidades, setUnidades] = useState({
+    piso:"",
+    numero:"",
+    tipo_unidad: "",
+    usuario_id: "",
+    alicuota: "x@gmail.com",
+  })
 
-  const crearFuncionario = async (values) =>{
+  const crearFuncionario = async (values, unidades) =>{
     setValues(values)
-    const val = await crear(values, message, navigate)
+    crear(values, message, navigate, unidades)
   }
 
   return (

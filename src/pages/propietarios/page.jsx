@@ -7,14 +7,14 @@ import TableComp from "components/tabla/Tabla";
 
 //librerias
 import { SearchOutlined } from '@ant-design/icons';
-import { Button, Input, Space, Badge} from 'antd';
+import { Button, Input, Space, Badge, Popconfirm} from 'antd';
 import Highlighter from 'react-highlight-words';
 import { Link } from 'react-router-dom';
-import { propietarios } from "lib/peticiones/funcionariosList";
 import { Spin } from 'antd';
 
 //peticiones
 import { LoadingOutlined } from '@ant-design/icons';
+import { propietarios, propietariosEliminar } from "lib/peticiones/funcionariosList";
 
 
  const Propietarios = ()=> {
@@ -24,6 +24,7 @@ import { LoadingOutlined } from '@ant-design/icons';
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+  const [borrado, setBorrado] = useState(false)
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -35,6 +36,16 @@ import { LoadingOutlined } from '@ant-design/icons';
     clearFilters();
     setSearchText('');
   };
+
+  const confirm = (e,record) =>{
+    setSpinning(false)
+    propietariosEliminar(record.id_unidad, record.id).then(res=>{
+      setBorrado(true)
+      setSpinning(true)
+    }).catch(error=>{
+      setSpinning(true)
+    })
+  }
 
   const getColumnSearchProps = (dataIndex) => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters, close }) => (
@@ -133,7 +144,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 
   useEffect(() => {
     sync()
-  }, [])
+  }, [borrado])
 
 
   //funcion que controla las peticiones inciales del componente
@@ -167,25 +178,16 @@ import { LoadingOutlined } from '@ant-design/icons';
         )),
 
       onFilter: (value, record) => record.estado.indexOf(value) === 0,*/
-    },
-    {
-      title:'Apellido',
-      dataIndex:'apellido',
-      ...getColumnSearchProps('apellido'),
-     /* filters: 
-        estados.map(es=>(
-          {
-            text: es.estado,
-            value: es.estado,
-          }
-        )),
-
-      onFilter: (value, record) => record.estado.indexOf(value) === 0,*/
+      render: (text, record) => <Link to={''+record.gasto_id+'/'+record.id}>{record.nombre + ' ' + record.apellido}</Link>,
     },
     {
       title:'Cedula',
       dataIndex:'cedula',
       ...getColumnSearchProps('cedula'),
+    },
+    {
+      title:'Eliminar',
+      render: (text, record) =>   <Popconfirm title="Borrar Usuario" description="Esta seguro que quiere borrar el usuario?" onConfirm={(e)=>{confirm(e, record)}} okText="Si" cancelText="No"><Button danger>Borrar</Button></Popconfirm>,
     },
 
   ];
