@@ -6,6 +6,8 @@ import { validateLetter } from "helpers/validator/validateForm"
 
 import { propietarios } from "lib/peticiones/funcionariosList";
 
+import { validarEmpty } from "helpers/validator/validateEmpty";
+
 const NoStatic = ({setData, data}) => {
 
     const {message} = App.useApp();
@@ -57,7 +59,7 @@ const NoStatic = ({setData, data}) => {
             setValues({
                 ...values,
                 [e.target.name]:id,
-                ["monto"]: (3000*val)
+                ["monto"]: ((3000*val)/100)
             })   
         }
 
@@ -127,14 +129,22 @@ const NoStatic = ({setData, data}) => {
                         <div className="field pb-4 mb-2" >
                             <label className="label">Monto<span className="has-text-danger-dark">*</span></label>
                             <div className="control has-icons-right pb-4 is-expanded">
-                                <input className="input" type="number" placeholder="Monto" value={values.monto} required name='monto' readOnly/>
+                                <input className="input" type="number" placeholder="Monto" value={values.monto} required name='monto' readOnly/> <span>Bs</span>
                             </div>
                         </div>
                     </div>
                     <div className="column is-12">
-                        <button className="button is-primary is-dark is-fullwidth" onClick={(e)=>(
-                            setData({...values})
-                        )} >Agregar</button>
+                        <button className="button is-primary is-dark is-fullwidth" onClick={(e)=>{
+                            if (validarEmpty) {
+                                setData({...values})
+                            
+                            }else{
+                                message.error('Campos vacios en el formulario', 2)
+                            }
+
+                        }
+                            
+                        } >Agregar</button>
                     </div>
                 </div>
             </form>

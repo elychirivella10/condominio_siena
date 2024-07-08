@@ -64,7 +64,8 @@ const InformacionGastos = () =>{
         {
           title:'Monto',
           dataIndex:'monto',
-          width:100
+          width:100,
+          render: (text, record) => text + ' ' +'Bs',
         }
       ];
 
@@ -77,7 +78,7 @@ const InformacionGastos = () =>{
         {
           key: '2',
           label: 'Monto',
-          children: reciboInfo.monto,
+          children: reciboInfo.monto + ' ' +'Bs',
         },
         {
           key: '3',
