@@ -1,40 +1,66 @@
 import { useEffect, useState } from "react"
 import {CSVLink} from "react-csv"
 
-const Export = ({data, dataFiltrada}) =>{
+const Export = ({data, dataFiltrada, nombre}) =>{
     const [val, setVal] = useState([])
     useEffect(() => {
         let customHeadings = []
-        if (dataFiltrada.length >0) {
+
+        if (nombre ==='recibo') {
+          if (dataFiltrada.length >0) {
             customHeadings = dataFiltrada.map(item=>({
-                "Identificacion": item.cedula,
-                "Nombres y Apellidos": item.apellidos_nombres,
-                "Estado": item.estado,
-                "Estatus": item.estatus,
-                "Entidad": item.entidad_adscripcion,
-                "Jefe1x10": item.cantidad_responsable,
-                "1x10": item.porcentaje+'%',
+              "Nro Recibo": 'Nro. '+item.id,
+              "Descripcion": item.descripcion,
+              "Estado": item.estado,
+              "monto": item.monto,
+              "Referencia de Pago": item.ref_pago,
               }))
         }else{
             customHeadings = data.map(item=>({
-                "Identificacion": item.cedula,
-                "Nombres y Apellidos": item.apellidos_nombres,
-                "Estado": item.estado,
-                "Estatus": item.estatus,
-                "Entidad": item.entidad_adscripcion,
-                "Jefe1x10": item.cantidad_responsable,
-                "1x10": item.porcentaje+'%',
+              "Nro Recibo": 'Nro. '+item.id,
+              "Descripcion": item.descripcion,
+              "Estado": item.estado,
+              "monto": item.monto,
+              "Referencia de Pago": item.ref_pago,
               }))
-            }
+        }
+        }else{
+          if (dataFiltrada.length >0) {
+            customHeadings = dataFiltrada.map(item=>({
+              "Nombre": item.nombre,
+              "Apellido": item.apellido,
+              "Cedula": item.cedula,
+              "Alicuota": item.alicuota,
+              "Email": item.email,
+              "Telefono": item.telefono,
+              "Unidad": item.tipo_unidad,
+              "Piso": item.piso,
+              "Clasificador Unidad": item.numero,
+              }))
+        }else{
+            customHeadings = data.map(item=>({
+              "Nombre": item.nombre,
+              "Apellido": item.apellido,
+              "Cedula": item.cedula,
+              "Alicuota": item.alicuota,
+              "Email": item.email,
+              "Telefono": item.telefono,
+              "Unidad": item.tipo_unidad,
+              "Piso": item.piso,
+              "Clasificador Unidad": item.numero,
+              }))
+        }
+        }
+        
             
-            setVal(customHeadings)
+        setVal(customHeadings)
     }, [dataFiltrada, data])
     
     return(
         data.length>0?
         <CSVLink
-        filename={"funcionarios.csv"}
-        separator={";"}
+        filename={nombre+".csv"}
+        separator={","}
         data={val}
         className="button is-primary"
       >

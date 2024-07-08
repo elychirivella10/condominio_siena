@@ -158,7 +158,6 @@ import { LoadingOutlined } from '@ant-design/icons';
       title:'Nombre',
       dataIndex:'nombre',
       ...getColumnSearchProps('nombre'),
-      render: (text, record) => <Link to={''+record.cedula+'/'+record.id}>{text}</Link>,
      /* filters: 
         estados.map(es=>(
           {
@@ -173,7 +172,6 @@ import { LoadingOutlined } from '@ant-design/icons';
       title:'Apellido',
       dataIndex:'apellido',
       ...getColumnSearchProps('apellido'),
-      render: (text, record) => <Link to={''+record.cedula+'/'+record.id}>{record.nombre+' ' + record.apellido}</Link>,
      /* filters: 
         estados.map(es=>(
           {
@@ -188,7 +186,6 @@ import { LoadingOutlined } from '@ant-design/icons';
       title:'Cedula',
       dataIndex:'cedula',
       ...getColumnSearchProps('cedula'),
-      render: (text, record) => <Link to={''+record.cedula+'/'+record.id}>{text}</Link>,
     },
 
   ];
@@ -202,7 +199,7 @@ import { LoadingOutlined } from '@ant-design/icons';
         <div className="columns is-multiline">
           <div className="column is-12">
             <div className="box">
-              <Export data={data} dataFiltrada ={dataFiltrada}/>
+              <Export data={data} dataFiltrada ={dataFiltrada} nombre={'propietarios'}/>
             </div>
               <TableComp  setDataFiltrada={setDataFiltrada} columns={Columns} data={data} pagination={{ defaultPageSize: 10, pageSizeOptions: ['5', '7', '10', '20', '30'] }}/>
           </div>

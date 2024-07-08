@@ -212,7 +212,7 @@ import { getRole, getUser } from 'helpers/auth/auth';
           <div className="column is-12">
             <div className="box">
              {/*  //modulo para exportar data en excel */}
-              <Export data={data} dataFiltrada ={dataFiltrada}/>
+              <Export data={data} dataFiltrada ={dataFiltrada} nombre={'recibos'}/>
             </div>
               <TableComp  setDataFiltrada={setDataFiltrada} columns={Columns} data={data} pagination={{ defaultPageSize: 10, pageSizeOptions: ['5', '7', '10', '20', '30'] }}/>
           </div>
